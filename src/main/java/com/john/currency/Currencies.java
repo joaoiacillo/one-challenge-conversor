@@ -44,10 +44,11 @@ public class Currencies {
 	
 	/**
 	 * Loads API currencies into the currencies map.
-	 * @param isDebug If `true`, uses a sample currency table for development purposes.
+	 * 
+	 * Loads a small sample set of currencies if API is not enabled.
 	 */
-	public static void load(boolean isDebug) {
-		if (isDebug) {
+	public static void load() {
+		if (!APIHandler.isEnabled()) {
 			loadDebugSampleCurrencies();
 			return;
 		}

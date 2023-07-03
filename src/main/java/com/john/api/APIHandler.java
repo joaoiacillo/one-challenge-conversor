@@ -13,8 +13,12 @@ import org.json.JSONObject;
  */
 public class APIHandler {
 	
+	private final static PropsLoader props = new PropsLoader();
+	
+	private final static boolean API_ENABLED = props.getProperty("api.enabled").equals("true");
+	
 	// TODO Remove public API_KEY
-	private final static String API_KEY = new PropsLoader().getProperty("api.key");
+	private final static String API_KEY = props.getProperty("api.key");
 	private final static String API_VERSION = "v3";
 	private final static String API_PROTOCOL_HOST = "https://api.currencyapi.com";
 	
@@ -56,11 +60,17 @@ public class APIHandler {
 	}
 
 	public static JSONObject getCurrenciesJson() {
+		if (!API_ENABLED) return null;
 		return getJson(createAPIURL("currencies"));
 	}
 	
 	public static JSONObject getLatestJson() {
+		if (!API_ENABLED) return null;
 		return getJson(createAPILatestURL(BASE_CURRENCY));
+	}
+	
+	public static boolean isEnabled() {
+		return API_ENABLED;
 	}
 	
 }
