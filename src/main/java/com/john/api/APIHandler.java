@@ -22,7 +22,7 @@ public class APIHandler {
 	private final static String API_VERSION = "v3";
 	private final static String API_PROTOCOL_HOST = "https://api.currencyapi.com";
 	
-	private final static String BASE_CURRENCY = "USD";
+	public final static String BASE_CURRENCY = "USD";
 	
 	private static JSONObject getJson(String URL) {
 		try {

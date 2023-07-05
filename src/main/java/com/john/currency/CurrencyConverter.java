@@ -16,15 +16,16 @@ public class CurrencyConverter {
 		double sourceBaseCurrencyAmount = sourceCurrency.getBaseCurrencyAmount();
 		double targetBaseCurrencyAmount = targetCurrency.getBaseCurrencyAmount();
 		double result = value / sourceBaseCurrencyAmount * targetBaseCurrencyAmount;
+		
 		return Math.round(result * 100.0) / 100.0;
 	}
 	
-	public static void setSourceCurrency(String newSourceCurrencyIso) {
-		sourceCurrency = Currencies.get(newSourceCurrencyIso);
+	public static void setSourceCurrency(Currency sourceCurrency) {
+		CurrencyConverter.sourceCurrency = sourceCurrency;
 	}
 	
-	public static void setTargetCurrency(String newTargetCurrencyIso) {
-		targetCurrency = Currencies.get(newTargetCurrencyIso);
+	public static void setTargetCurrency(Currency targetCurrency) {
+		CurrencyConverter.targetCurrency = targetCurrency;
 	}
 	
 }
