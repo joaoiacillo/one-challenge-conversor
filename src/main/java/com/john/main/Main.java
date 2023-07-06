@@ -4,14 +4,14 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.john.currency.Currencies;
-import com.john.gui.*;
+import com.john.gui.SelectorFrame;
 
 public class Main {
 
 	public static void main(String[ ] args ) {
 		Currencies.load();
 		useSystemLookAndFeel();
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -20,7 +20,7 @@ public class Main {
 			}
 		});
 	}
-	
+
 	public static void useSystemLookAndFeel() {
 		try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -28,5 +28,5 @@ public class Main {
             e.printStackTrace();
         }
 	}
-	
+
 }

@@ -6,10 +6,10 @@ import java.io.FileNotFoundException;
 import java.util.Properties;
 
 public class PropsLoader extends Properties {
-	
+
 	public PropsLoader() {
 		super();
-		
+
 		try {
 			FileInputStream fis = new FileInputStream(new File("api.config"));
 			load(fis);
@@ -19,5 +19,5 @@ public class PropsLoader extends Properties {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

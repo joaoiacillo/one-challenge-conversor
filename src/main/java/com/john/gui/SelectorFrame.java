@@ -4,10 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -64,7 +62,7 @@ public class SelectorFrame extends JFrame {
 			e.printStackTrace();
 		}
 		buttonsPanel.add(temperatureBtn);
-		
+
 		temperatureBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

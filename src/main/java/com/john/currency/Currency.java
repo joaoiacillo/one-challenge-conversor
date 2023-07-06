@@ -5,13 +5,13 @@ package com.john.currency;
  * @author João Iacillo
  */
 public class Currency {
-	
+
 	private final String isoCode;
 	private final String name;
 	private final String symbol;
-	
+
 	private final double baseCurrencyAmount;
-	
+
 	public Currency(String isoCode, String name, String symbol, double baseCurrencyAmount) {
 		this.isoCode = isoCode;
 		this.name = name;
@@ -34,5 +34,5 @@ public class Currency {
 	public double getBaseCurrencyAmount() {
 		return baseCurrencyAmount;
 	}
-	
+
 }
