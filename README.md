@@ -13,6 +13,14 @@ da formação Java e Orientação a Objeto do Oracle ONE._
 
 ![](./screenshots/moeda.png)
 
+#### Tabela Seletora de Moeda
+
+![](./screenshots/moeda_tabela.png)
+
+#### Tabela Seletora de Moeda Filtrada
+
+![](./screenshots/moeda_tabela_filtro.png)
+
 ### Conversor de Temperatura
 
 ![](./screenshots/temperatura.png)
