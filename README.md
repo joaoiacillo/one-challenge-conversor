@@ -1,6 +1,21 @@
-# ONE Challenge Conversor
+# 🎯 Oracle Next Education Challenge - Conversor
 
-Esse é o código para o desafio de Conversor do Oracle Next Education.
+_Esse repositório contém o código fonte para o desafio Decodificador de Texto
+da formação Iniciante em Programação do Oracle ONE._
+
+## Screenshots
+
+### Seletor de Conversores
+
+![](./screenshots/seletor.png)
+
+### Conversor de Moedas
+
+![](./screenshots/moeda.png)
+
+### Conversor de Temperatura
+
+![](./screenshots/temperatura.png)
 
 ## Configurando a API
 
@@ -25,10 +40,4 @@ api.key = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 api.base_currency = BRL
 ```
 
-## Checklist
-
- - [x] Inserir conversor de moedas
- - [ ] Inserir conversor de temperatura
- - [ ] Inserir diálogo de tabela para seleção de moeda
- - [ ] Aprimorar a interface do conversor de moedas
  
