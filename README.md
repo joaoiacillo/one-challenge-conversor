@@ -1,7 +1,7 @@
 # 🎯 Oracle Next Education Challenge - Conversor
 
-_Esse repositório contém o código fonte para o desafio Decodificador de Texto
-da formação Iniciante em Programação do Oracle ONE._
+_Esse repositório contém o código fonte para o desafio Conversor
+da formação Java e Orientação a Objeto do Oracle ONE._
 
 ## Screenshots
 
