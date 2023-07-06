@@ -21,6 +21,7 @@ public class SelectorFrame extends JFrame {
 
 	public SelectorFrame() {
 		super("Conversores");
+		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		Container contentPane = getContentPane();
@@ -63,6 +64,14 @@ public class SelectorFrame extends JFrame {
 			e.printStackTrace();
 		}
 		buttonsPanel.add(temperatureBtn);
+		
+		temperatureBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ConversorDeTemperaturaWindow dialog = new ConversorDeTemperaturaWindow(_this);
+				dialog.setVisible(true);
+			}
+		});
 
 		contentPane.add(buttonsPanel, BorderLayout.CENTER);
 		pack();

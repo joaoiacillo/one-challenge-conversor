@@ -1,5 +1,6 @@
 package com.john.gui;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -7,11 +8,20 @@ import java.awt.event.ActionListener;
 import java.util.Set;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import com.john.currency.Currencies;
 import com.john.currency.Currency;
@@ -24,8 +34,13 @@ public class CurrencySelectorDialog {
 	private String[] tableColumns = { "Moeda", "Código ISO", "Símbolo", "Valor Base" };
 	private Object[][] tableData;
 	
+	private JTextField searchField;
 	private JTable table;
+	
+	private JPanel searchPanel;
 	private JScrollPane pane;
+	
+	private TableRowSorter<TableModel> rowSorter;
 	
 	public CurrencySelectorDialog(Window owner) {
 		
@@ -41,7 +56,48 @@ public class CurrencySelectorDialog {
 		
 		this.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
+		this.rowSorter = new TableRowSorter<>(this.table.getModel());
+		this.table.setRowSorter(rowSorter);;
+		
 		this.pane = new JScrollPane(this.table);
+		
+		this.searchPanel = new JPanel();
+		this.searchField = new JTextField();
+		this.searchField.setPreferredSize(new Dimension(150, this.searchField.getPreferredSize().height));
+		
+		this.searchField.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				String text = searchField.getText();
+				
+				if (text.trim().length() == 0) {
+					rowSorter.setRowFilter(null);
+				} else {
+					rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+				}
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				String text = searchField.getText();
+				
+				if (text.trim().length() == 0) {
+					rowSorter.setRowFilter(null);
+				} else {
+					rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+				}
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				 throw new UnsupportedOperationException("Not supported yet.");
+			}
+			
+		});
+		
+		this.searchPanel.add(new JLabel("Filtro de pesquisa: "));
+		this.searchPanel.add(this.searchField);
 		
 	}
 	
@@ -84,12 +140,16 @@ public class CurrencySelectorDialog {
 	
 	public Currency showDialog(String initialIso) {
 		int initialIsoIndex = this.getIsoRow(initialIso);
+		this.searchField.setText("");
 		this.table.setRowSelectionInterval(initialIsoIndex, initialIsoIndex);
 		
 		while (true) {
 			int dialogResult = JOptionPane.showConfirmDialog(
 					this.owner,
-					this.pane,
+					new JComponent[] {
+							this.searchPanel,
+							this.pane
+					},
 					"Selecione a moeda abaixo:",
 					JOptionPane.OK_CANCEL_OPTION,
 					JOptionPane.PLAIN_MESSAGE,
@@ -97,8 +157,11 @@ public class CurrencySelectorDialog {
 			);
 			
 			if (dialogResult != JOptionPane.OK_OPTION) break;
-			
+
 			int selectedRow = this.table.getSelectedRow();
+			
+			int modelRow = this.table.convertRowIndexToModel(selectedRow);
+			TableModel model = this.table.getModel();
 			
 			// Selection out of range / Not selected
 			if (selectedRow < 0) {
@@ -106,9 +169,9 @@ public class CurrencySelectorDialog {
 				continue;
 			}
 			
-			String selectedIso = this.currenciesIso[selectedRow];
+			Currency selectedCurrency = Currencies.get(model.getValueAt(modelRow, 1).toString());
 			
-			return Currencies.get(selectedIso);
+			return selectedCurrency;
 		}
 		
 		return null;

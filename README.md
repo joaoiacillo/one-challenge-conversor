@@ -12,6 +12,7 @@ propriedades:
 
  - `api.enabled` → Habilita o uso da API caso o valor `true` seja providenciado.
  - `api.key` → A key do serviço CurrencyAPI: [currencyapi.com](currencyapi.com).
+ - `api.base_currency` [Opcional] → A moeda base a ser utilizada para as conversões. (Padrão: USD)
  
 **Exemplo de arquivo:**
 

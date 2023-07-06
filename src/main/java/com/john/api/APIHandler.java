@@ -1,6 +1,7 @@
 package com.john.api;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -15,14 +16,14 @@ public class APIHandler {
 	
 	private final static PropsLoader props = new PropsLoader();
 	
-	private final static boolean API_ENABLED = props.getProperty("api.enabled").equals("true");
+	private final static boolean API_ENABLED = props.getProperty("api.enabled") != null && props.getProperty("api.enabled").equals("true");
 	
 	// TODO Remove public API_KEY
 	private final static String API_KEY = props.getProperty("api.key");
 	private final static String API_VERSION = "v3";
 	private final static String API_PROTOCOL_HOST = "https://api.currencyapi.com";
 	
-	public final static String BASE_CURRENCY = "USD";
+	public final static String BASE_CURRENCY = props.getProperty("api.base_currency", "USD");
 	
 	private static JSONObject getJson(String URL) {
 		try {

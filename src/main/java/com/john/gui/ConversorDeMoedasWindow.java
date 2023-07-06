@@ -17,7 +17,6 @@ import com.john.currency.CurrencyConverter;
 // TODO turn this into a dialog
 public class ConversorDeMoedasWindow extends JDialog {
 	
-	private JPanel mainPanel;
 	private JPanel borderPanel;
 	private JPanel inputsPanel;
 	
@@ -41,7 +40,7 @@ public class ConversorDeMoedasWindow extends JDialog {
 		this.valueField.setPreferredSize(new Dimension(100, this.valueField.getPreferredSize().height));
 		this.inputsPanel.add(this.valueField);
 		
-		this.sourceCurrencySelector = new CurrencySelector(owner, APIHandler.BASE_CURRENCY);
+		this.sourceCurrencySelector = new CurrencySelector(this, APIHandler.BASE_CURRENCY);
 		this.inputsPanel.add(this.sourceCurrencySelector.getButton());
 		
 		this.switchBtn = new JButton();
@@ -66,7 +65,7 @@ public class ConversorDeMoedasWindow extends JDialog {
 		
 		this.inputsPanel.add(this.switchBtn);
 		
-		this.targetCurrencySelector = new CurrencySelector(owner, APIHandler.BASE_CURRENCY);
+		this.targetCurrencySelector = new CurrencySelector(this, APIHandler.BASE_CURRENCY);
 		this.inputsPanel.add(this.targetCurrencySelector.getButton());
 		
 		
