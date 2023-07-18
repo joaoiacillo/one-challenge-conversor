@@ -3,6 +3,7 @@ package com.oracle.one.conversor.currency;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.oracle.one.conversor.api.APIHandler;
@@ -20,7 +21,15 @@ public class Currencies {
 		JSONObject latestJson = APIHandler.getLatestJson().getJSONObject("data");
 
 		for (String isoCode : currenciesJson.keySet()) {
-			JSONObject currencyJson = currenciesJson.getJSONObject(isoCode);
+			JSONObject currencyJson;
+			
+			try {
+				currencyJson = currenciesJson.getJSONObject(isoCode);
+			} catch (JSONException e) {
+				System.err.println("Couldn't load " + isoCode + ". Skipping...");
+				continue;
+			}
+			
 			double value = latestJson.getJSONObject(isoCode).getDouble("value");
 
 			Currency currency = new Currency(
